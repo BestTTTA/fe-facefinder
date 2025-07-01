@@ -7,19 +7,19 @@ const noto_sans_thai = Noto_Sans_Thai({
 });
 
 export const metadata = {
-  title: "Where My Photos",
+  title: "Face me now",
   description: "ค้นหารูปภาพจากงาน กิจกรรม หรือเทศกาล ด้วยการอัปโหลดใบหน้า",
   openGraph: {
-    title: "Where My Photos",
+    title: "Face me now",
     description: "ค้นหารูปภาพจากงาน กิจกรรม หรือเทศกาล ด้วยการอัปโหลดใบหน้า",
-    url: "https://wheremyphotos.com",
-    siteName: "Where My Photos",
+    url: "https://facemenow.co",
+    siteName: "Face me now",
     images: [
       {
-        url: "https://wheremyphotos.com/op.png",
+        url: "https://facemenow.co/op.png",
         width: 1200,
         height: 630,
-        alt: "Where My Photos - ค้นหารูปภาพจากใบหน้า",
+        alt: "Face me now - ค้นหารูปภาพจากใบหน้า",
       },
     ],
     locale: "th_TH",
@@ -27,13 +27,13 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Where My Photos",
+    title: "Face me now",
     description: "ค้นหารูปภาพจากงาน กิจกรรม หรือเทศกาล ด้วยการอัปโหลดใบหน้า",
-    images: ["https://wheremyphotos.com/op.png"],
-    creator: "@wheremyphotos",
+    images: ["https://facemenow.co/op.png"],
+    creator: "@facemenow",
   },
   alternates: {
-    canonical: "https://wheremyphotos.com",
+    canonical: "https://facemenow.co",
   },
   robots: {
     index: true,
@@ -47,15 +47,15 @@ export const metadata = {
     },
   },
   keywords: [
-    "Where My Photos",
+    "Face me now",
     "ค้นหารูปภาพ",
     "หารูป",
     "ค้นหารูปภาพด้วยใบหน้า",
     "หาใบหน้าจากรูป",
   ],
-  authors: [{ name: "Where My Photos" }],
-  creator: "Where My Photos",
-  publisher: "Where My Photos",
+  authors: [{ name: "Face me now" }],
+  creator: "Face me now",
+  publisher: "Face me now",
   formatDetection: {
     email: false,
     address: false,
