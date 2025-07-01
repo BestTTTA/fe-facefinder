@@ -1,5 +1,8 @@
 import { Noto_Sans_Thai } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Layouts/Navbar";
+import Footer from "@/components/Layouts/Footer";
+import { ThemeModeScript } from "flowbite-react";
 
 const noto_sans_thai = Noto_Sans_Thai({
   weight: "400",
@@ -66,8 +69,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="th">
+      <head>
+        <ThemeModeScript />
+      </head>
       <body className={`${noto_sans_thai.className}`}>
+        <Navbar />
         <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

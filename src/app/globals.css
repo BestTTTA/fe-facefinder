@@ -1,9 +1,17 @@
 @import "tailwindcss";
+@plugin "flowbite-react/plugin/tailwindcss";
+@source "../../.flowbite-react/class-list.json";
+
+
+@theme {
+  --spacing-container: 1200px;
+  --btn-gradient: var(--btn-gradient);
+}
 
 :root {
   --background: #ffffff;
-}
-
-@theme {
-  --color-background: var(--background);
+  --width-container: 1200px;
+  --btn-gradient: linear-gradient(to right, #3b82f6, #8b5cf6);
+  --btn-solid: #855FF6;
+  --btn-select-solid: #3F83F8;
 }
