@@ -1,0 +1,10 @@
+Create an OpenGraph image for a Next.js app titled "Where My Photos".
+The image should feature:
+
+Many people’s faces from various events (diverse settings like parties, sport, trips).
+
+A collage or grid of these images to show variety.
+
+A visual element that suggests AI is searching or detecting faces (e.g., facial recognition bounding boxes or scanning effect).
+
+No app or generic icons — focus on the people, photos, and AI search theme.
