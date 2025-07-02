@@ -31,12 +31,12 @@ function Navbar() {
           <Image src="/logo.svg" alt="logo" width={100} height={100} />
         </Link>
         <div className="flex items-center gap-2 ml-auto">
-          <button
+          {/* <button
             style={{ background: "var(--btn-gradient)" }}
             className="hidden text-sm font-thin outline-4 outline-offset-2 outline-solid outline-purple-500 sm:inline-block px-8 py-2 rounded-full text-white shadow"
           >
             LOGIN
-          </button>
+          </button> */}
           <div className="relative" ref={menuRef}>
             <button
               className="p-2 rounded hover:bg-gray-100 focus:outline-none"
@@ -74,13 +74,13 @@ function Navbar() {
                 >
                   ติดต่อเรา
                 </button>
-                <button
+                {/* <button
                   style={{ background: "var(--btn-gradient)" }}
                   onClick={() => setMenuOpen(false)}
                   className="sm:hidden text-sm font-thin outline-4 outline-offset-2 outline-solid outline-purple-500 inline-block px-8 py-2 rounded-full text-white shadow mt-4"
                 >
                   LOGIN
-                </button>
+                </button> */}
               </div>
             )}
           </div>

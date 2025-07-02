@@ -30,7 +30,7 @@ function Carousel() {
       className="relative w-full"
       data-carousel="slide"
     >
-      <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
+      <div className="relative w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden rounded-lg">
         {slides.map((slide, idx) => (
           <div
             key={slide.alt}
@@ -42,10 +42,9 @@ function Carousel() {
           >
             <Image
               src={slide.src}
-              className="absolute object-fill w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
               alt={slide.alt}
-              width={500}
-              height={500}
+              fill
+              className="object-cover w-full h-full"
               priority={idx === 0}
             />
           </div>

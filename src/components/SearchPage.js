@@ -1,8 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 
 export default function SearchPage() {
   const [searchFile, setSearchFile] = useState(null);
@@ -12,7 +10,7 @@ export default function SearchPage() {
   const [previewImage, setPreviewImage] = useState(null); 
   const [hasConsent, setHasConsent] = useState(false);
   const [showConsentDetails, setShowConsentDetails] = useState(false);
-  const [mode, setMode] = useState('upload'); // 'upload' or 'camera'
+  const [mode, setMode] = useState('upload');
   const [searchResults, setSearchResults] = useState(null);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [previewIndex, setPreviewIndex] = useState(0);
@@ -20,8 +18,6 @@ export default function SearchPage() {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const streamRef = useRef(null);
-
-  const router = useRouter();
 
   const closeCamera = () => {
     if (streamRef.current) {
@@ -129,7 +125,6 @@ export default function SearchPage() {
           const file = new File([blob], "camera_capture.png", { type: "image/png" });
           setSearchFile(file);
           closeCamera(); 
-          setSearchMessage('✅ ถ่ายภาพจากกล้องสำเร็จ!');
 
           const objectUrl = URL.createObjectURL(file);
           setPreviewImage(objectUrl);
@@ -190,23 +185,30 @@ export default function SearchPage() {
   const handlePrev = () => setPreviewIndex((i) => Math.max(i - 1, 0));
   const handleNext = (images) => setPreviewIndex((i) => Math.min(i + 1, images.length - 1));
 
+  const handleClearImage = () => {
+    setPreviewImage(null);
+    setSearchFile(null);
+  };
+
   return (
     <div className="p-6 max-w-2xl mx-auto bg-white rounded-lg shadow-lg">
       <h1 className="text-2xl font-heading font-bold mb-6 text-center text-secondary-dark">🔍 ค้นหาใบหน้าที่คล้ายกัน</h1>
-      <p className="text-gray-700 mb-6 text-center text-sm">อัปโหลดรูปภาพจากไฟล์ หรือถ่ายภาพจากกล้องเพื่อค้นหาใบหน้าที่คล้ายกันในฐานข้อมูล FaceFindr</p>
+      <p className="text-gray-700 mb-6 text-center text-sm">อัปโหลดรูปภาพจากไฟล์ หรือถ่ายภาพจากกล้องเพื่อค้นหาใบหน้าที่คล้ายกันในฐานข้อมูล FaceMeNow</p>
 
       {/* Mode Toggle */}
-      <div className="flex justify-center gap-4 mb-6">
+      <div className="flex justify-center mb-6">
         <button
           type="button"
-          className={`flex-1 py-2 rounded-l-full border border-r-0 border-gray-300 text-sm font-semibold ${mode === 'upload' ? '[background:var(--btn-select-solid)] text-white' : 'bg-gray-100 text-gray-700'}`}
+          className={`py-2 px-6 w-full border border-gray-300 text-sm font-semibold rounded-l-full ${mode === 'upload' ? 'bg-primary text-white' : 'bg-gray-200 text-gray-700'}`}
+          style={mode === 'upload' ? { background: "var(--btn-select-solid)" } : { background: "#f3f4f6" }}
           onClick={() => setMode('upload')}
         >
           อัพโหลดรูป
         </button>
         <button
           type="button"
-          className={`flex-1 py-2 rounded-r-full border border-gray-300 text-sm font-semibold ${mode === 'camera' ? '[background:var(--btn-select-solid)] text-white' : 'bg-gray-100 text-gray-700'}`}
+          className={`py-2 px-6 w-full border border-gray-300 text-sm font-semibold rounded-r-full -ml-px ${mode === 'camera' ? 'bg-primary text-white' : 'bg-gray-200 text-gray-700'}`}
+          style={mode === 'camera' ? { background: "var(--btn-select-solid)" } : { background: "#f3f4f6" }}
           onClick={() => setMode('camera')}
         >
           ถ่ายรูป
@@ -214,35 +216,57 @@ export default function SearchPage() {
       </div>
 
       {/* Upload Section */}
-      {mode === 'upload' && (
-        <div className="mb-6">
-          <label htmlFor="search-file" className="block text-gray-700 text-sm font-bold mb-2">
-            เลือกรูปภาพจากไฟล์
-          </label>
+      {mode === 'upload' && !previewImage && (
+        <label
+          htmlFor="search-file"
+          className="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-gray-100 hover:bg-gray-200 transition mb-6"
+        >
+          <div className="flex flex-col items-center justify-center pt-5 pb-6">
+            <svg
+              aria-hidden="true"
+              className="w-12 h-12 mb-3 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M7 16V4a1 1 0 011-1h8a1 1 0 011 1v12m-4 4h-4a1 1 0 01-1-1v-4h6v4a1 1 0 01-1 1z"
+              />
+            </svg>
+            <p className="mb-2 text-sm text-gray-500">
+              <span className="font-semibold">อัพโหลดรูป</span>
+            </p>
+            <p className="text-xs text-gray-500">คลิกที่นี่เพื่ออัปโหลดรูปภาพ</p>
+          </div>
           <input
             id="search-file"
             type="file"
             accept="image/jpeg,image/jpg,image/png"
             onChange={handleFileChange}
-            className="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:[background:var(--btn-solid)] file:text-white cursor-pointer"
+            className="hidden"
           />
-        </div>
+        </label>
       )}
 
       {/* Camera Section */}
-      {mode === 'camera' && (
+      {mode === 'camera' && !previewImage && (
         <div className="mb-6 flex justify-center">
           {!isCameraOpen ? (
             <button
               onClick={() => {
                 setIsCameraOpen(true);
               }}
-              className="h-40 w-40 flex outline-6 outline-offset-2 outline-double items-center outline-gray-500/50 justify-center [background:var(--btn-solid)] gap-2 text-white font-bold py-3 px-6 rounded-lg text-lg shadow-md font-heading"
+              className="h-40 w-40 flex outline-6 outline-offset-2 outline-double items-center flex-col outline-gray-500/50 justify-center bg-gray-100 gap-2 text-gray-500 font-bold py-3 px-6 rounded-lg text-lg shadow-md font-heading"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-12 h-12">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6.75V5.25A2.25 2.25 0 0013.5 3h-3A2.25 2.25 0 008.25 5.25v1.5m-2.25 0h12a2.25 2.25 0 012.25 2.25v9A2.25 2.25 0 0118 19.5H6a2.25 2.25 0 01-2.25-2.25v-9A2.25 2.25 0 016 6.75zm6 3a3 3 0 100 6 3 3 0 000-6z" />
               </svg>
               เปิดกล้อง
+              <p className='text-xs font-thin'>กดที่นี่เพื่อเปิดกล้อง</p>
             </button>
           ) : (
             <div className="flex flex-col items-center">
@@ -263,13 +287,14 @@ export default function SearchPage() {
                 </button>
                 <button
                   onClick={closeCamera}
-                  className="flex-1 bg-danger-DEFAULT bg-red-600 bg-gray-400 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 shadow-md"
+                  className="flex-1 bg-danger-DEFAULT bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 shadow-md"
                 >
                   ปิด
                 </button>
               </div>
             </div>
           )}
+          
         </div>
       )}
 
@@ -278,6 +303,17 @@ export default function SearchPage() {
         <div className="mb-6 text-center">
           <h2 className="text-base font-heading font-bold mb-2 text-primary-dark">ภาพที่เลือก/ถ่าย</h2>
           <img src={previewImage} alt="Preview" className="max-w-xs h-32 object-contain mx-auto rounded-lg shadow-md border border-gray-300" />
+          <button
+            onClick={handleClearImage}
+            className="mt-2 p-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition inline-flex items-center justify-center"
+            title="ล้างรูปภาพ"
+            aria-label="ล้างรูปภาพ"
+            type="button"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
       )}
 
@@ -348,9 +384,10 @@ export default function SearchPage() {
       {/* Search Button */}
       <button
         onClick={handleSearchImage}
-        className={`w-full text-white [background:var(--btn-gradient)] font-bold py-3 px-6 rounded-lg transition-colors duration-200 text-lg shadow-md font-heading`}
+        className="w-full text-white font-bold py-3 px-6 rounded-full transition-colors duration-200 text-lg shadow-md font-heading"
+        style={{ background: "var(--btn-gradient)" }}
       >
-        {isSearching ? 'กำลังค้นหา...' : 'ค้นหาใบหน้า'}
+        {isSearching ? 'กำลังค้นหา...' : 'เริ่มต้นค้นหาใบหน้า'}
       </button>
 
       {/* Search Results Section */}
@@ -379,8 +416,8 @@ export default function SearchPage() {
 
           {/* Modal for full image and sliding */}
           {isPreviewOpen && (
-            <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 z-50 flex justify-center items-center">
-              <div className="bg-white bg-opacity-90 rounded-lg p-4 max-w-3xl w-full max-h-[90vh] overflow-auto relative flex flex-col items-center">
+            <div className="fixed top-0 left-0 w-full h-full bg-opacity-40 z-50 flex justify-center items-center">
+              <div className="bg-gray-500/50 bg-opacity-90 rounded-lg p-4 max-w-3xl w-full h-[500px] sm:h-[600px] overflow-auto relative flex flex-col items-center justify-center">
                 <button onClick={handleClosePreview} className="absolute top-2 right-2 text-gray-600 hover:text-gray-800 text-xl">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -396,15 +433,26 @@ export default function SearchPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                     </svg>
                   </button>
+                  <div className='flex items-center flex-col'>
                   <img
                     src={searchResults.results.matches.partial_matches[previewIndex].image_url}
                     alt={`Preview ${previewIndex + 1}`}
                     className="object-contain rounded-lg shadow-md max-h-[60vh] max-w-full mx-4"
                   />
+                  <a
+                    href={searchResults.results.matches.partial_matches[previewIndex].image_url}
+                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 px-4 py-2 [background:var(--btn-solid)] text-white rounded transition"
+                  >
+                    บันทึกรูปภาพ
+                  </a>
+                  </div>
                   <button
                     onClick={() => handleNext(searchResults.results.matches.partial_matches)}
                     disabled={previewIndex === searchResults.results.matches.partial_matches.length - 1}
-                    className="p-2 text-gray-700 hover:text-blue-600 disabled:opacity-30"
+                    className="p-2 text-gray-700 disabled:opacity-30"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />

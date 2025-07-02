@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Layouts/Navbar";
 import Footer from "@/components/Layouts/Footer";
 import { ThemeModeScript } from "flowbite-react";
+import Script from "next/script";
 
 const noto_sans_thai = Noto_Sans_Thai({
   weight: "400",
@@ -71,6 +72,18 @@ export default function RootLayout({ children }) {
     <html lang="th">
       <head>
         <ThemeModeScript />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-7JKHP5GQSZ"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-7JKHP5GQSZ');
+          `}
+        </Script>
       </head>
       <body className={`${noto_sans_thai.className}`}>
         <Navbar />
