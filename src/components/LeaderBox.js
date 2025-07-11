@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 export default function LeaderBox({ eventId }) {
   const [board, setBoard] = useState([]);
   const [stats, setStats] = useState(null);
-  const [sortBy, setSortBy] = useState("recent"); // เพิ่ม state
+  const [sortBy, setSortBy] = useState("recent");
 
   useEffect(() => {
     const fetchLeaderboard = async () => {

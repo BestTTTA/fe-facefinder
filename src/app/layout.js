@@ -85,9 +85,11 @@ export default function RootLayout({ children }) {
           `}
         </Script>
       </head>
-      <body className={`${noto_sans_thai.className}`}>
-        <Navbar />
-        <main>{children}</main>
+      <body className={`${noto_sans_thai.className} flex flex-col justify-between min-h-screen`}>
+        <div className="">
+          <Navbar />
+          <main>{children}</main>
+        </div>
         <Footer />
       </body>
     </html>

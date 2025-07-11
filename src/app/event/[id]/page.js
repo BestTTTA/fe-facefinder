@@ -69,24 +69,46 @@ export default function EventPage() {
     );
 
   return (
-    <div className="max-w-2xl mx-auto p-4">
-      <div className="w-full aspect-[16/9] relative rounded-lg overflow-hidden mb-6 shadow">
-        <Image
-          src={event.event_img_url || "/placeholder-image.jpg"}
-          alt={event.event_name}
-          fill
-          onError={(e) => {
-            e.target.src = "/placeholder-image.jpg";
-          }}
-        />
+    <div className="">
+      <div className="w-full p-4">
+        <div className="relative aspect-square rounded-lg overflow-hidden mb-6 shadow border">
+          {/* Blurred background image */}
+          <Image
+            src={event.event_img_url || "/placeholder-image.jpg"}
+            alt={event.event_name}
+            fill
+            className="object-cover blur-sm scale-200 brightness-100"
+            onError={(e) => {
+              e.target.src = "/placeholder-image.jpg";
+            }}
+          />
+
+          {/* Foreground square image */}
+          <div className="relative z-10 flex justify-center items-center w-full h-full">
+            <Image
+              src={event.event_img_url || "/placeholder-image.jpg"}
+              alt={event.event_name}
+              fill
+              className="object-contain rounded-lg w-full h-full"
+              sizes="(max-width: 768px) 100vw, 400px"
+              onError={(e) => {
+                e.target.src = "/placeholder-image.jpg";
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="w-full px-4">
+          <div className="mb-2 text-2xl font-bold">{event.event_name}</div>
+          <div className="mb-8 text-gray-500">
+            {formatThaiDateTime(event.start_at)}
+          </div>
+        </div>
       </div>
-      <div className="mb-2 text-2xl font-bold">{event.event_name}</div>
-      <div className="mb-8 text-gray-500">
-        {formatThaiDateTime(event.start_at)}
-      </div>
+
       <LeaderBox eventId={event.id} />
-      <DonateBox eventId={event.id} />
       <SearchPage eventId={event.id} />
+      <DonateBox eventId={event.id} />
     </div>
   );
 }
