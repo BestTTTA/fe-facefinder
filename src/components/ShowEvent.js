@@ -1,16 +1,8 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-
-const mockEvents = [
-  {
-    id: 1,
-    name: "BNI POWER",
-    datetime: "2025-07-01T18:30:00",
-    image: "/bni-banner.jpg",
-  },
-];
+import { useEffect, useState } from "react";
 
 function formatThaiDateTime(datetime) {
   const months = [
@@ -28,9 +20,33 @@ function formatThaiDateTime(datetime) {
 
 function ShowEvent() {
   const router = useRouter();
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_API}/events`)
+      .then(res => res.json())
+      .then(data => {
+        setEvents(data.events || []);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Failed to fetch events", err);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <div className="p-4">กำลังโหลด...</div>;
+  }
+
+  if (events.length === 0) {
+    return <div className="p-4">ไม่พบอีเวนต์</div>;
+  }
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full p-2">
-      {mockEvents.map(event => (
+      {events.map(event => (
         <button
           key={event.id}
           className="w-full aspect-[16/9] bg-white rounded-lg shadow overflow-hidden flex flex-col text-left hover:shadow-lg transition cursor-pointer"
@@ -38,15 +54,15 @@ function ShowEvent() {
         >
           <div className="relative w-full h-full">
             <Image
-              src={event.image}
-              alt={event.name}
+              src={event.event_img_url || "/default-event.jpg"} // fallback
+              alt={event.event_name}
               fill
               className="object-cover border"
             />
           </div>
           <div className="flex-1 flex flex-col justify-center p-4">
-            <div className="text-lg font-semibold mb-2">{event.name}</div>
-            <div className="text-gray-500 text-sm">{formatThaiDateTime(event.datetime)}</div>
+            <div className="text-lg font-semibold mb-2">{event.event_name}</div>
+            <div className="text-gray-500 text-sm">{formatThaiDateTime(event.start_at)}</div>
           </div>
         </button>
       ))}

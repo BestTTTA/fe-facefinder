@@ -9,7 +9,8 @@ export default function Home() {
       <main className="flex w-full justify-center">
         <div className="flex flex-col items-center w-container gap-8">
           <Carousel />
-          <Search />
+          {/* <Search /> */}
+          <h1>อีเวนท์ล่าสุด</h1>
           <ShowEvent />
         </div>
       </main>
