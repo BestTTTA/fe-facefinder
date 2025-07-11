@@ -82,7 +82,6 @@ export default function DonateBox({ eventId }) {
 
   return (
     <div className="relative w-full overflow-hidden">
-      {/* Background effects - matching footer */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"></div>
       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
       
