@@ -75,7 +75,7 @@ export default function LeaderBox({ eventId }) {
             <div className="flex-1">
               <div className="text-lg font-semibold">{user.display_name}</div>
               <div className="text-sm text-gray-600">
-                บริจาคทั้งหมด {user.total_donated} ฿ ({user.donation_count} ครั้ง)
+                {user.display_details}
               </div>
               <div className="text-xs text-gray-400 mt-1">
                 ล่าสุด: {formatThaiDatetime(user.last_donation_at)}
