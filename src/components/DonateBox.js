@@ -9,8 +9,8 @@ export default function DonateBox({ eventId }) {
   const [loading, setLoading] = useState(false);
 
   const handleDonate = async () => {
-    if (!name || !eventId || !amount || amount <= 0 || !consent) {
-      alert("กรุณากรอกข้อมูลให้ครบถ้วน และยินยอมให้เผยแพร่ชื่อ");
+    if (!name || !eventId || !amount || amount < 10 || !consent) {
+      alert("กรุณากรอกข้อมูลให้ครบถ้วน และจำนวนเงินขั้นต่ำ 10 บาท และยินยอมให้เผยแพร่ชื่อ");
       return;
     }
 
@@ -89,11 +89,19 @@ export default function DonateBox({ eventId }) {
       <label className="block mb-1 font-medium">จำนวนเงิน (บาท)</label>
       <input
         type="number"
-        min="1"
+        min="10"
         value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-        className="w-full border border-gray-300 p-2 rounded mb-4"
+        onChange={(e) => {
+          const val = Number(e.target.value);
+          if (val >= 10 || e.target.value === "") {
+            setAmount(e.target.value);
+          }
+        }}
+        className="w-full border border-gray-300 p-2 rounded mb-1"
       />
+      <div className="text-sm text-orange-600 flex items-center mb-4">
+ขั้นต่ำ <b>10</b> บาท
+      </div>
 
       <label className="flex items-center mb-4">
         <input
