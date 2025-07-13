@@ -4,14 +4,26 @@
 
 
 @theme {
-  --spacing-container: 1200px;
-  --btn-gradient: var(--btn-gradient);
+
+  --spacing-container: 42rem;
+
+  /* Buttons */
+  --btn-gradient: linear-gradient(135deg, #7CF9E2, #A162F7, #FF9E80);
+  --color-solid: #A162F7;
+  --color-select-solid: #3B82F6;
+
+  --color-background: #0F172A;
+  --color-surface: #1E1E2F;
+  --color-show: #353544;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #a1a3a4;
+  --color-accent: #C084FC;
+  --color-success: #84CC16;
+  --color-danger: #F87171;
+
+  /* Text Sizes */
+  --text-h1: 2rem;     /* 12px */
+  --text-h2: 1.4rem;    /* 14px */
+  --text-h3: 0.7rem;      /* 16px */
 }
 
-:root {
-  --background: #ffffff;
-  --width-container: 1200px;
-  --btn-gradient: linear-gradient(to right, #3b82f6, #8b5cf6);
-  --btn-solid: #855FF6;
-  --btn-select-solid: #3F83F8;
-}

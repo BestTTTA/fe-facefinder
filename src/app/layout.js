@@ -13,6 +13,16 @@ const noto_sans_thai = Noto_Sans_Thai({
 export const metadata = {
   title: "Face me now",
   description: "ค้นหารูปภาพจากงาน กิจกรรม หรือเทศกาล ด้วยการอัปโหลดใบหน้า",
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/favicon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   openGraph: {
     title: "Face me now",
     description: "ค้นหารูปภาพจากงาน กิจกรรม หรือเทศกาล ด้วยการอัปโหลดใบหน้า",

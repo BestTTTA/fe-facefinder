@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import axios from "axios";
+import Consent from "./Consent";
 
 export default function SearchPage({ eventId }) {
   const [searchFile, setSearchFile] = useState(null);
@@ -9,7 +11,6 @@ export default function SearchPage({ eventId }) {
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState(null);
   const [hasConsent, setHasConsent] = useState(false);
-  const [showConsentDetails, setShowConsentDetails] = useState(false);
   const [mode, setMode] = useState("upload");
   const [searchResults, setSearchResults] = useState(null);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
@@ -216,11 +217,11 @@ export default function SearchPage({ eventId }) {
   };
 
   return (
-    <div className="p-6 max-w-2xl mx-auto bg-white rounded-lg shadow-lg">
-      <h1 className="text-2xl font-heading font-bold mb-6 text-center text-secondary-dark">
+    <div className="max-w-container mx-auto bg-surface rounded-lg shadow-lg p-4">
+      <h1 className="text-h1 font-bold mb-6 text-center text-text-primary">
         🔍 ค้นหาใบหน้าที่คล้ายกัน
       </h1>
-      <p className="text-gray-700 mb-6 text-center text-sm">
+      <p className="text-h3 font-thin text-text-secondary mb-6 text-center">
         อัปโหลดรูปภาพจากไฟล์
         หรือถ่ายภาพจากกล้องเพื่อค้นหาใบหน้าที่คล้ายกันในฐานข้อมูล FaceMeNow
       </p>
@@ -231,30 +232,20 @@ export default function SearchPage({ eventId }) {
           type="button"
           className={`py-2 px-6 w-full border border-gray-300 text-sm font-semibold rounded-l-full ${
             mode === "upload"
-              ? "bg-primary text-white"
-              : "bg-gray-200 text-gray-700"
+              ? "bg-select-solid text-text-primary"
+              : "bg-gray-200 text-text-secondary"
           }`}
-          style={
-            mode === "upload"
-              ? { background: "var(--btn-select-solid)" }
-              : { background: "#f3f4f6" }
-          }
           onClick={() => setMode("upload")}
         >
           อัพโหลดรูป
         </button>
         <button
           type="button"
-          className={`py-2 px-6 w-full border border-gray-300 text-sm font-semibold rounded-r-full -ml-px ${
+          className={`py-2 px-6 w-full border border-text-secondary text-sm font-semibold rounded-r-full ${
             mode === "camera"
-              ? "bg-primary text-white"
-              : "bg-gray-200 text-gray-700"
+              ? "bg-select-solid text-text-primary"
+              : "bg-text-primary text-text-secondary"
           }`}
-          style={
-            mode === "camera"
-              ? { background: "var(--btn-select-solid)" }
-              : { background: "#f3f4f6" }
-          }
           onClick={() => setMode("camera")}
         >
           ถ่ายรูป
@@ -265,28 +256,21 @@ export default function SearchPage({ eventId }) {
       {mode === "upload" && !previewImage && (
         <label
           htmlFor="search-file"
-          className="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-gray-100 hover:bg-gray-200 transition mb-6"
+          className="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-white rounded-lg cursor-pointer bg-accent transition mb-6"
         >
           <div className="flex flex-col items-center justify-center pt-5 pb-6">
-            <svg
-              aria-hidden="true"
-              className="w-12 h-12 mb-3 text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M7 16V4a1 1 0 011-1h8a1 1 0 011 1v12m-4 4h-4a1 1 0 01-1-1v-4h6v4a1 1 0 01-1 1z"
-              />
-            </svg>
+            <Image
+              src="/upload-icon.svg"
+              alt="Upload Icon"
+              width={48}
+              height={48}
+            />
             <p className="mb-2 text-sm text-gray-500">
-              <span className="font-semibold">อัพโหลดรูป</span>
+              <span className="font-thin text-text-primary text-h2">
+                อัพโหลดรูป
+              </span>
             </p>
-            <p className="text-xs text-gray-500">
+            <p className="text-h3 text-text-primary font-thin">
               คลิกที่นี่เพื่ออัปโหลดรูปภาพ
             </p>
           </div>
@@ -308,24 +292,16 @@ export default function SearchPage({ eventId }) {
               onClick={() => {
                 setIsCameraOpen(true);
               }}
-              className="h-40 w-40 flex outline-6 outline-offset-2 outline-double items-center flex-col outline-gray-500/50 justify-center bg-gray-100 gap-2 text-gray-500 font-bold py-3 px-6 rounded-lg text-lg shadow-md font-heading"
+              className="text-text-primary text-h2 font-bold h-40 w-40 flex outline-4 outline-offset-2 outline-double items-center flex-col outline-white justify-center bg-accent gap-2 py-3 px-6 rounded-lg shadow-md"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-12 h-12"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.75 6.75V5.25A2.25 2.25 0 0013.5 3h-3A2.25 2.25 0 008.25 5.25v1.5m-2.25 0h12a2.25 2.25 0 012.25 2.25v9A2.25 2.25 0 0118 19.5H6a2.25 2.25 0 01-2.25-2.25v-9A2.25 2.25 0 016 6.75zm6 3a3 3 0 100 6 3 3 0 000-6z"
-                />
-              </svg>
+              <Image
+                src="/camera-icon.svg"
+                alt="Camera Icon"
+                width={48}
+                height={48}
+              />
               เปิดกล้อง
-              <p className="text-xs font-thin">กดที่นี่เพื่อเปิดกล้อง</p>
+              <p className="text-h3 font-thin">กดที่นี่เพื่อเปิดกล้อง</p>
             </button>
           ) : (
             <div className="flex flex-col items-center">
@@ -340,7 +316,7 @@ export default function SearchPage({ eventId }) {
               <div className="flex space-x-4">
                 <button
                   onClick={capturePhoto}
-                  className="flex-1 [background:var(--btn-solid)] hover:bg-secondary-dark bg-gray-400 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 shadow-md"
+                  className="flex-1 bg-solid hover:bg-secondary-dark text-text-primary font-bold py-2 px-4 rounded-lg transition-colors duration-200 shadow-md"
                 >
                   ถ่าย
                 </button>
@@ -359,13 +335,16 @@ export default function SearchPage({ eventId }) {
       {/* Image Preview Section */}
       {previewImage && (
         <div className="mb-6 text-center">
-          <h2 className="text-base font-heading font-bold mb-2 text-primary-dark">
+          <h2 className="text-h2 font-bold mb-2 text-text-primary">
             ภาพที่เลือก/ถ่าย
           </h2>
-          <img
+          <Image
             src={previewImage}
             alt="Preview"
-            className="max-w-xs h-32 object-contain mx-auto rounded-lg shadow-md border border-gray-300"
+            width={200}
+            height={128}
+            className="h-32 object-contain mx-auto rounded-lg shadow-md border w-fit"
+            unoptimized
           />
           <button
             onClick={handleClearImage}
@@ -374,119 +353,22 @@ export default function SearchPage({ eventId }) {
             aria-label="ล้างรูปภาพ"
             type="button"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
+            <Image
+              src="/close-icon.svg"
+              alt="Close Icon"
+              width={16}
+              height={16}
+            />
           </button>
         </div>
       )}
 
       {/* Consent Checkbox (moved below preview) */}
-      <div className="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-        <div className="flex items-start">
-          <div className="flex items-center h-5">
-            <input
-              id="consent"
-              type="checkbox"
-              checked={hasConsent}
-              onChange={(e) => {
-                setHasConsent(e.target.checked);
-                localStorage.setItem("hasConsent", e.target.checked);
-              }}
-              className="w-4 h-4 text-primary-dark bg-gray-100 border-gray-300 rounded focus:ring-primary-dark"
-            />
-          </div>
-          <label
-            htmlFor="consent"
-            className="ml-2 text-sm text-gray-700 flex flex-col gap-2"
-          >
-            <span className="font-semibold">
-              ข้อตกลงและเงื่อนไขการใช้ระบบจดจำใบหน้า
-            </span>
-            <button
-              type="button"
-              className="text-blue-500 underline text-xs w-fit"
-              onClick={() => setShowConsentDetails((v) => !v)}
-            >
-              {showConsentDetails ? "ซ่อนรายละเอียด" : "อ่านเพิ่มเติม"}
-            </button>
-            {showConsentDetails && (
-              <div className="mt-2 text-xs text-gray-600 space-y-3">
-                <div>
-                  <div className="font-medium text-gray-800 mb-1">
-                    ข้อควรระวังในการใช้ระบบจดจำใบหน้า:
-                  </div>
-                  <ul className="list-disc ml-6 text-gray-600 space-y-1">
-                    <li>
-                      ห้ามอัปโหลดรูปภาพใบหน้าของผู้อื่นโดยไม่ได้รับอนุญาต
-                      หากจำเป็นต้องได้รับความยินยอมจากบุคคลนั้น (หรือผู้ปกครอง)
-                      สำหรับการใช้ข้อมูลใบหน้าของพวกเขา
-                    </li>
-                    <li>
-                      ห้ามแก้ไข แพร่กระจาย หรือดำเนินการอื่นๆ ที่ผิดกฎหมาย
-                      ไม่มีจริยธรรม หรือไม่เหมาะสมกับรูปภาพที่พบ
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <div className="font-medium text-gray-800 mb-1">
-                    กฎการประมวลผลข้อมูลใบหน้า:
-                  </div>
-                  <ul className="list-disc ml-6 text-gray-600 space-y-1">
-                    <li>
-                      ข้อมูลใบหน้าเป็นข้อมูลส่วนบุคคลที่สำคัญ
-                      การปฏิเสธการให้ข้อมูลใบหน้าจะไม่ส่งผลกระทบต่อการใช้งานปกติของระบบ
-                    </li>
-                    <li>การค้นหาด้วยใบหน้าจะแสดงผลเฉพาะกับผู้ค้นหาเท่านั้น</li>
-                    <li>
-                      ระบบจะไม่เก็บรวบรวม เก็บรักษา ใช้ ประมวลผล ส่งต่อ ให้
-                      หรือเปิดเผยข้อมูลใบหน้าโดยพลการ
-                      ยกเว้นเพื่อการค้นหารูปภาพอย่างรวดเร็ว
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <div className="font-medium text-gray-800 mb-1">
-                    ข้อจำกัดความรับผิดชอบ:
-                  </div>
-                  <ul className="list-disc ml-6 text-gray-600 space-y-1">
-                    <li>
-                      ข้อมูลใบหน้าเป็นข้อมูลส่วนบุคคลที่สำคัญ
-                      การใช้ข้อมูลใบหน้าของผู้อื่นควรได้รับอนุญาตจากเจ้าของสิทธิ์
-                    </li>
-                    <li>
-                      ผู้ใช้ควรใช้ข้อมูลใบหน้าอย่างระมัดระวังและหลีกเลี่ยงการละเมิดสิทธิ์ที่ชอบด้วยกฎหมายของผู้อื่น
-                    </li>
-                    <li>
-                      หากมีข้อโต้แย้งเกี่ยวกับข้อกำหนดข้างต้น
-                      คุณสามารถขอให้หยุดใช้ฟังก์ชันการจดจำใบหน้าที่เกี่ยวข้องกับข้อมูลส่วนบุคคลของคุณได้ทันที
-                    </li>
-                  </ul>
-                </div>
-                <div className="text-gray-600 italic mt-2">
-                  โดยการคลิกที่ช่องทำเครื่องหมายนี้
-                  คุณยืนยันว่าคุณได้อ่านและยอมรับข้อกำหนดและเงื่อนไขทั้งหมดข้างต้น
-                </div>
-              </div>
-            )}
-          </label>
-        </div>
-      </div>
+      <Consent value={hasConsent} onChange={setHasConsent} />
 
       {searchMessage && (
         <p
-          className={`mt-4 text-md font-medium text-center ${
+          className={`mt-4 text-text-primary font-h2 text-center ${
             searchMessage.startsWith("❌")
               ? "text-danger-DEFAULT"
               : "text-secondary-dark"
@@ -499,7 +381,7 @@ export default function SearchPage({ eventId }) {
       {/* Search Button */}
       <button
         onClick={handleSearchImage}
-        className="w-full text-white font-bold py-3 px-6 rounded-full transition-colors duration-200 text-lg shadow-md font-heading"
+        className="w-full text-text-primary py-3 px-6 rounded-full transition-colors duration-200 text-lg shadow-md font-bold"
         style={{ background: "var(--btn-gradient)" }}
       >
         {isSearching ? "กำลังค้นหา..." : "เริ่มต้นค้นหาใบหน้า"}
@@ -509,13 +391,13 @@ export default function SearchPage({ eventId }) {
       {searchResults &&
       searchResults.results &&
       searchResults.results.matches ? (
-        <div className="mt-8">
-          <h2 className="text-xl font-bold mb-4 text-center">
+        <div className="mt-10">
+          <h2 className="text-h2 font-bold mb-4 text-center text-text-primary">
             ผลลัพธ์การค้นหา
           </h2>
 
           {/* Statistics */}
-          {searchResults.results.statistics && (
+          {/* {searchResults.results.statistics && (
             <div className="mb-6 p-4 bg-gray-50 rounded-lg">
               <div className="text-center text-lg font-semibold text-gray-800 mb-2">
                 สถิติการค้นหา
@@ -547,7 +429,7 @@ export default function SearchPage({ eventId }) {
                 </div>
               </div>
             </div>
-          )}
+          )} */}
 
           {/* All Matches */}
           {(() => {

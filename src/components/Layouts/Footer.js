@@ -14,7 +14,7 @@ function Footer() {
       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 w-full ">
           {/* Company Info */}
           <div className="col-span-1 md:col-span-8 w-full">

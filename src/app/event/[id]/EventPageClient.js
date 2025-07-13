@@ -1,35 +1,10 @@
 "use client";
 import Image from "next/image";
-import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import SearchPage from "@/components/SearchPage";
 import DonateBox from "@/components/DonateBox";
 import LeaderBox from "@/components/LeaderBox";
-
-function formatThaiDateTime(datetime) {
-  const months = [
-    "มกราคม",
-    "กุมภาพันธ์",
-    "มีนาคม",
-    "เมษายน",
-    "พฤษภาคม",
-    "มิถุนายน",
-    "กรกฎาคม",
-    "สิงหาคม",
-    "กันยายน",
-    "ตุลาคม",
-    "พฤศจิกายน",
-    "ธันวาคม",
-  ];
-  const d = new Date(datetime);
-  const day = d.getDate();
-  const month = months[d.getMonth()];
-  const year = d.getFullYear() + 543;
-  const hour = d.getHours().toString().padStart(2, "0");
-  const min = d.getMinutes().toString().padStart(2, "0");
-  return `${day} ${month} ${year} เวลา ${hour}:${min} น.`;
-}
-
+import formatThaiDateTime from "@/lib/formatThaiDateTime";
 
 export default function EventPageClient({ eventId }) {
   const id = eventId;
@@ -70,9 +45,9 @@ export default function EventPageClient({ eventId }) {
     );
 
   return (
-    <div className="">
-      <div className="w-full p-4">
-        <div className="relative aspect-square rounded-lg overflow-hidden mb-6 shadow border">
+    <div className="bg-background py-4 px-4 sm:px-0">
+      <div className="p-4">
+        <div className="relative sm:aspect-[12/4] aspect-square rounded-lg overflow-hidden mb-6 shadow border">
           {/* Blurred background image */}
           <Image
             src={event.event_img_url || "/placeholder-image.jpg"}
@@ -100,16 +75,20 @@ export default function EventPageClient({ eventId }) {
         </div>
 
         <div className="w-full px-4">
-          <div className="mb-2 text-2xl font-bold">{event.event_name}</div>
-          <div className="mb-8 text-gray-500">
+          <div className="mb text-h1 text-text-primary font-bold">
+            {event.event_name}
+          </div>
+          <div className="text-h2 text-text-secondary font-thin mb-4">
             {formatThaiDateTime(event.start_at)}
           </div>
         </div>
       </div>
 
-      <LeaderBox eventId={event.id} />
-      <SearchPage eventId={event.id} />
-      <DonateBox eventId={event.id} />
+      <div className="space-y-8">
+        <LeaderBox eventId={event.id} />
+        <SearchPage eventId={event.id} />
+        <DonateBox eventId={event.id} />
+      </div>
     </div>
   );
 }
