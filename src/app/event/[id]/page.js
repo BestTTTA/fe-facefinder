@@ -17,6 +17,9 @@ export async function generateMetadata({ params }) {
   return {
     title: `Facemenow | ${event.event_name}`,
     description: event.event_description || "รายละเอียดกิจกรรม",
+    icons: {
+      icon: `${process.env.NEXT_PUBLIC_BASE_URL}/favicon.png}`,
+    },
     openGraph: {
       title: event.event_name,
       description: event.event_description || "รายละเอียดกิจกรรม",

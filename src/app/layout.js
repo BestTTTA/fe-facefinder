@@ -73,6 +73,20 @@ export default function RootLayout({ children }) {
       <head>
         <ThemeModeScript />
         <Script
+          id="ld-json-logo"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Facemenow",
+              url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
+              logo: `${process.env.NEXT_PUBLIC_BASE_URL}/favicon.png}`, // ลิงก์เต็มของโลโก้ ขนาดแนะนำ 112x112
+            }),
+          }}
+        />
+        <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-7JKHP5GQSZ"
           strategy="afterInteractive"
         />
@@ -85,7 +99,9 @@ export default function RootLayout({ children }) {
           `}
         </Script>
       </head>
-      <body className={`${noto_sans_thai.className} flex flex-col justify-between min-h-screen`}>
+      <body
+        className={`${noto_sans_thai.className} flex flex-col justify-between min-h-screen`}
+      >
         <div className="">
           <Navbar />
           <main>{children}</main>
