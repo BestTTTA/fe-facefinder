@@ -219,12 +219,12 @@ export default function SearchPage({ eventId }) {
   return (
     <div className="max-w-container mx-auto bg-surface rounded-lg shadow-lg p-4">
       <h1 className="text-h1 font-bold mb-6 text-center text-text-primary">
-        🔍 ค้นหาใบหน้าที่คล้ายกัน
+        🔍 ค้นหารูปของคุณด้วยใบหน้า
       </h1>
-      <p className="text-h3 font-thin text-text-secondary mb-6 text-center">
+      {/* <p className="text-h3 font-thin text-text-secondary mb-6 text-center">
         อัปโหลดรูปภาพจากไฟล์
         หรือถ่ายภาพจากกล้องเพื่อค้นหาใบหน้าที่คล้ายกันในฐานข้อมูล FaceMeNow
-      </p>
+      </p> */}
 
       {/* Mode Toggle */}
       <div className="flex justify-center mb-6">

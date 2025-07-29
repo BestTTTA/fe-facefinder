@@ -14,7 +14,7 @@ export async function generateMetadata({ params }) {
   const event = await res.json();
 
   return {
-    title: `Facemenow | ${event.event_name}`,
+    title: `Facefinder | ${event.event_name}`,
     description: event.event_details || "รายละเอียดกิจกรรม",
     icons: {
       icon: [

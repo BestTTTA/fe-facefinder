@@ -20,24 +20,21 @@ function Footer() {
           <div className="col-span-1 md:col-span-8 w-full">
             <div className="flex items-center gap-3 mb-6 group">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg blur opacity-75 group-hover:opacity-100 transition-opacity"></div>
+                <div className="absolute inset-0 "></div>
                 <img
-                  src="/favicon.png"
-                  alt="Facemenow Logo"
-                  className="relative h-12 w-14 rounded-lg"
+                  src="/logo.png"
+                  alt="Facdfinder Logo"
+                  className="relative h-20 w-40 rounded-lg"
                 />
               </div>
-              <span className="text-4xl font-bold bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
-                Facemenow
-              </span>
             </div>
 
             <div className="sm:flex w-full justify-between">
               <p className="text-lg text-gray-300 mb-2 leading-relaxed">
-                อนาคตของการถ่ายภาพ การจดจำใบหน้า และประสบการณ์ที่ราบรื่น
+                ASC is an annual forum for Asian youth, inspiring science through talks by Nobel Laureates and experts.
               </p>
               <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-                Made with ♥️ in Korat City
+                Suranaree University
               </p>
             </div>
 
@@ -48,7 +45,7 @@ function Footer() {
               </div>
               <div className="flex items-center gap-3 text-white hover:text-purple-400 transition-colors group">
                 <div className="w-2 h-2 bg-pink-500 rounded-full group-hover:scale-125 transition-transform"></div>
-                <span className="font-semibold">hello@facemenow.co</span>
+                <span className="font-semibold">hello@ASC2025-fece-finder.co</span>
               </div>
               <div className="flex items-center gap-3 text-gray-400">
                 <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
@@ -140,7 +137,7 @@ function Footer() {
 
             {/* Copyright */}
             <div className="text-gray-400 text-center">
-              © 2025 Facemenow. สงวนลิขสิทธิ์
+              © 2025 ASC2025-fece-finder. สงวนลิขสิทธิ์
             </div>
 
             {/* Social Links */}

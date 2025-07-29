@@ -30,7 +30,7 @@ export default function UploadPage() {
 
   const fetchEvents = async () => {
     try {
-      const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_API}/events`);
+      const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_API_UPLOAD}/events`);
       setEvents(res.data.events || []);
     } catch (err) {
       console.error("Failed to load events", err);

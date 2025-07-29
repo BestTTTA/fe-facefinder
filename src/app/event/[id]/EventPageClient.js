@@ -78,16 +78,19 @@ export default function EventPageClient({ eventId }) {
           <div className="mb text-h1 text-text-primary font-bold">
             {event.event_name}
           </div>
-          <div className="text-h2 text-text-secondary font-thin mb-4">
+          <div className="text-h3 text-text-secondary font-thin mb-4">
+            {event.event_details}
+          </div>
+          <div className="text-h2 text-text-primary font-thin mb-4">
             {formatThaiDateTime(event.start_at)}
           </div>
         </div>
       </div>
 
       <div className="space-y-8">
-        <LeaderBox eventId={event.id} />
+        {/* <LeaderBox eventId={event.id} /> */}
         <SearchPage eventId={event.id} />
-        <DonateBox eventId={event.id} />
+        {/* <DonateBox eventId={event.id} /> */}
       </div>
     </div>
   );

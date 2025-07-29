@@ -11,29 +11,29 @@ const noto_sans_thai = Noto_Sans_Thai({
 });
 
 export const metadata = {
-  title: "Face me now",
-  description: "ค้นหารูปภาพจากงาน กิจกรรม หรือเทศกาล ด้วยการอัปโหลดใบหน้า",
+  title: "ASC2025-fece-finder",
+  description: "The Asian Science Camp (ASC) is an annual forum for pre-collegiate and college students, fostering discussion and cooperation to advance science in Asia. Inspired by the Lindau Nobel Laureate Meetings, ASC was co-proposed in 2005 by Nobel Laureates Yuan Tseh Lee and Masatoshi Koshiba. The first camp took place in Taipei in 2007 and has since been hosted in various Asian cities. ASC invites Nobel Laureates and distinguished scientists for plenary sessions, discussions, and competitions, aiming to inspire young scientists. Governed by the International Board of Asian Science Camp (IBASC), ASC operates as a non-profit initiative supported by educational institutions.",
   icons: {
     icon: [
       { url: '/favicon.ico' },
-      { url: '/favicon.png', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16.png', sizes: '16x16', type: 'image/png' },
     ],
     apple: [
-      { url: '/favicon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/favicon-32.png', sizes: '180x180', type: 'image/png' },
     ],
   },
   openGraph: {
-    title: "Face me now",
-    description: "ค้นหารูปภาพจากงาน กิจกรรม หรือเทศกาล ด้วยการอัปโหลดใบหน้า",
-    url: "https://facemenow.co",
-    siteName: "Face me now",
+    title: "ASC2025-fece-finder",
+    description: "The Asian Science Camp (ASC) is an annual forum for pre-collegiate and college students, fostering discussion and cooperation to advance science in Asia. Inspired by the Lindau Nobel Laureate Meetings, ASC was co-proposed in 2005 by Nobel Laureates Yuan Tseh Lee and Masatoshi Koshiba. The first camp took place in Taipei in 2007 and has since been hosted in various Asian cities. ASC invites Nobel Laureates and distinguished scientists for plenary sessions, discussions, and competitions, aiming to inspire young scientists. Governed by the International Board of Asian Science Camp (IBASC), ASC operates as a non-profit initiative supported by educational institutions.",
+    url: "https://facefinder.thetigerteamacademy.net",
+    siteName: "ASC2025-fece-finder",
     images: [
       {
-        url: "https://facemenow.co/op.png",
+        url: "https://facefinder.thetigerteamacademy.net/op.jpg",
         width: 1200,
         height: 630,
-        alt: "Face me now - ค้นหารูปภาพจากใบหน้า",
+        alt: "ASC2025-fece-finder",
       },
     ],
     locale: "th_TH",
@@ -41,13 +41,13 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Face me now",
-    description: "ค้นหารูปภาพจากงาน กิจกรรม หรือเทศกาล ด้วยการอัปโหลดใบหน้า",
-    images: ["https://facemenow.co/op.png"],
-    creator: "@facemenow",
+    title: "ASC2025-fece-finder",
+    description: "The Asian Science Camp (ASC) is an annual forum for pre-collegiate and college students, fostering discussion and cooperation to advance science in Asia. Inspired by the Lindau Nobel Laureate Meetings, ASC was co-proposed in 2005 by Nobel Laureates Yuan Tseh Lee and Masatoshi Koshiba. The first camp took place in Taipei in 2007 and has since been hosted in various Asian cities. ASC invites Nobel Laureates and distinguished scientists for plenary sessions, discussions, and competitions, aiming to inspire young scientists. Governed by the International Board of Asian Science Camp (IBASC), ASC operates as a non-profit initiative supported by educational institutions.",
+    images: ["https://facefinder.thetigerteamacademy.net/op.jpg"],
+    creator: "@facefinder",
   },
   alternates: {
-    canonical: "https://facemenow.co",
+    canonical: "https://facefinder.thetigerteamacademy.net",
   },
   robots: {
     index: true,
@@ -61,15 +61,15 @@ export const metadata = {
     },
   },
   keywords: [
-    "Face me now",
+    "ASC2025-fece-finder",
     "ค้นหารูปภาพ",
     "หารูป",
     "ค้นหารูปภาพด้วยใบหน้า",
     "หาใบหน้าจากรูป",
   ],
-  authors: [{ name: "Face me now" }],
-  creator: "Face me now",
-  publisher: "Face me now",
+  authors: [{ name: "ASC2025-fece-finder" }],
+  creator: "ASC2025-fece-finder",
+  publisher: "ASC2025-fece-finder",
   formatDetection: {
     email: false,
     address: false,
@@ -90,7 +90,7 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "Facemenow",
+              name: "Facefinder",
               url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
               logo: `${process.env.NEXT_PUBLIC_BASE_URL}/favicon.png}`, // ลิงก์เต็มของโลโก้ ขนาดแนะนำ 112x112
             }),

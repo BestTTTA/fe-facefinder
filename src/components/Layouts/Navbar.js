@@ -30,16 +30,14 @@ function Navbar() {
         <Link href="/" className="flex justify-center items-center w-full">
           <div className="flex items-center gap-3 group ">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg blur opacity-75 group-hover:opacity-100 transition-opacity"></div>
+              <div className="absolute inset-0"></div>
               <img
-                src="/favicon.png"
-                alt="Facemenow Logo"
-                className="relative h-10 w-12 rounded-lg"
+                src="/logo.png"
+                alt="ASC2025-fece-finder Logo"
+                className="relative h-12 w-30 rounded-lg"
               />
             </div>
-            <span className="text-lg md:text-xl font-bold bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
-              Facemenow
-            </span>
+
           </div>
         </Link>
         <div className="flex items-center gap-2 ml-auto">

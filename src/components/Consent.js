@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState, useEffect } from "react";
 
 function Consent({ value, onChange }) {
@@ -16,88 +16,89 @@ function Consent({ value, onChange }) {
   };
 
   return (
-    <div className="mb-6 p-4 bg-text-primary rounded-lg border border-gray-200">
-      <div className="flex items-start">
-        <div className="flex items-center h-5">
-          <input
-            id="consent"
-            type="checkbox"
-            checked={hasConsent}
-            onChange={(e) => handleConsentChange(e.target.checked)}
-            className="w-4 h-4 text-primary-dark rounded"
-          />
-        </div>
-        <label
-          htmlFor="consent"
-          className="ml-2 text-sm text-gray-700 flex flex-col gap-2"
-        >
-          <span className="font-semibold">
-            ข้อตกลงและเงื่อนไขการใช้ระบบจดจำใบหน้า
+    <div className="mb-6 p-4 bg-white rounded-lg border border-gray-200 shadow-sm">
+      <div className="flex items-start gap-3">
+        <input
+          id="consent"
+          type="checkbox"
+          checked={hasConsent}
+          onChange={(e) => handleConsentChange(e.target.checked)}
+          className="mt-1 w-4 h-4 text-primary-dark border-gray-300 rounded"
+        />
+        <label htmlFor="consent" className="text-sm text-gray-800 flex-1">
+          <span className="font-semibold block mb-2">
+            Terms and Conditions for Using Facial Recognition System
           </span>
           <button
             type="button"
-            className="text-blue-500 underline text-xs w-fit"
+            className="text-blue-600 underline text-xs"
             onClick={() => setShowConsentDetails((v) => !v)}
           >
-            {showConsentDetails ? "ซ่อนรายละเอียด" : "อ่านเพิ่มเติม"}
+            {showConsentDetails ? "Hide details" : "Read more"}
           </button>
+
           {showConsentDetails && (
-            <div className="mt-2 text-xs text-gray-600 space-y-3">
-              <div>
-                <div className="font-medium text-gray-800 mb-1">
-                  ข้อควรระวังในการใช้ระบบจดจำใบหน้า:
-                </div>
-                <ul className="list-disc ml-6 text-gray-600 space-y-1">
+            <div className="mt-4 text-xs text-gray-700 space-y-4">
+              <section>
+                <h4 className="font-medium text-gray-900 mb-2">
+                  Precautions for Using Facial Recognition:
+                </h4>
+                <ul className="list-disc ml-5 space-y-1">
                   <li>
-                    ห้ามอัปโหลดรูปภาพใบหน้าของผู้อื่นโดยไม่ได้รับอนุญาต
-                    หากจำเป็นต้องได้รับความยินยอมจากบุคคลนั้น (หรือผู้ปกครอง)
-                    สำหรับการใช้ข้อมูลใบหน้าของพวกเขา
+                    Do not upload other people's facial images without their permission.
+                    If necessary, obtain consent from the individual or their guardian.
                   </li>
                   <li>
-                    ห้ามแก้ไข แพร่กระจาย หรือดำเนินการอื่นๆ ที่ผิดกฎหมาย
-                    ไม่มีจริยธรรม หรือไม่เหมาะสมกับรูปภาพที่พบ
+                    Do not edit, share, or use photos in any illegal, unethical, or immoral way.
                   </li>
                 </ul>
-              </div>
-              <div>
-                <div className="font-medium text-gray-800 mb-1">
-                  กฎการประมวลผลข้อมูลใบหน้า:
-                </div>
-                <ul className="list-disc ml-6 text-gray-600 space-y-1">
+              </section>
+
+              <section>
+                <h4 className="font-medium text-gray-900 mb-2">
+                  Public Notice of Facial Information Processing Rules:
+                </h4>
+                <ul className="list-decimal ml-5 space-y-1">
                   <li>
-                    ข้อมูลใบหน้าเป็นข้อมูลส่วนบุคคลที่สำคัญ
-                    การปฏิเสธการให้ข้อมูลใบหน้าจะไม่ส่งผลกระทบต่อการใช้งานปกติของระบบ
-                  </li>
-                  <li>การค้นหาด้วยใบหน้าจะแสดงผลเฉพาะกับผู้ค้นหาเท่านั้น</li>
-                  <li>
-                    ระบบจะไม่เก็บรวบรวม เก็บรักษา ใช้ ประมวลผล ส่งต่อ ให้
-                    หรือเปิดเผยข้อมูลใบหน้าโดยพลการ
-                    ยกเว้นเพื่อการค้นหารูปภาพอย่างรวดเร็ว
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <div className="font-medium text-gray-800 mb-1">
-                  ข้อจำกัดความรับผิดชอบ:
-                </div>
-                <ul className="list-disc ml-6 text-gray-600 space-y-1">
-                  <li>
-                    ข้อมูลใบหน้าเป็นข้อมูลส่วนบุคคลที่สำคัญ
-                    การใช้ข้อมูลใบหน้าของผู้อื่นควรได้รับอนุญาตจากเจ้าของสิทธิ์
+                    Facial information is personal data. Refusing to provide it will not affect
+                    your ability to view photo albums.
                   </li>
                   <li>
-                    ผู้ใช้ควรใช้ข้อมูลใบหน้าอย่างระมัดระวังและหลีกเลี่ยงการละเมิดสิทธิ์ที่ชอบด้วยกฎหมายของผู้อื่น
+                    If the album manager enables the "Search by Face" feature, users can upload
+                    a face to search for related photos. Results are only shown to the searcher.
                   </li>
                   <li>
-                    หากมีข้อโต้แย้งเกี่ยวกับข้อกำหนดข้างต้น
-                    คุณสามารถขอให้หยุดใช้ฟังก์ชันการจดจำใบหน้าที่เกี่ยวข้องกับข้อมูลส่วนบุคคลของคุณได้ทันที
+                    If "Automatic Facial Recognition" is enabled, faces in images will be
+                    detected and listed below the image. Clicking a face performs a search.
+                  </li>
+                  <li>
+                    The system does not collect, store, or share facial data for any purpose
+                    other than face-based photo search.
                   </li>
                 </ul>
-              </div>
-              <div className="text-gray-600 italic mt-2">
-                โดยการคลิกที่ช่องทำเครื่องหมายนี้
-                คุณยืนยันว่าคุณได้อ่านและยอมรับข้อกำหนดและเงื่อนไขทั้งหมดข้างต้น
-              </div>
+              </section>
+
+              <section>
+                <h4 className="font-medium text-gray-900 mb-2">Disclaimer:</h4>
+                <ul className="list-disc ml-5 space-y-1">
+                  <li>
+                    You may request the album manager to stop using facial recognition features
+                    related to your personal data at any time.
+                  </li>
+                  <li>
+                    Using facial data of others requires proper authorization.
+                    Avoid infringing on the rights of others.
+                  </li>
+                  <li>
+                    The album manager is responsible for enabling facial recognition only
+                    with legal authorization.
+                  </li>
+                  <li>
+                    Any disputes or liabilities resulting from unauthorized use of facial
+                    recognition are not the responsibility of the platform or its providers.
+                  </li>
+                </ul>
+              </section>
             </div>
           )}
         </label>

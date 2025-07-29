@@ -22,8 +22,9 @@
   --color-danger: #F87171;
 
   /* Text Sizes */
-  --text-h1: 2rem;     /* 12px */
-  --text-h2: 1.4rem;    /* 14px */
-  --text-h3: 0.7rem;      /* 16px */
+  --text-h1: 2rem;     
+  --text-h2: 1.4rem;    
+  --text-h3: 1.1rem;      
+  --text-h4: 0.7rem;      
 }
 

@@ -22,7 +22,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'minio.facemenow.co',
+        hostname: 'minio.facefinder.thetigerteamacademy.net',
         pathname: '/**',
       },
     ],
