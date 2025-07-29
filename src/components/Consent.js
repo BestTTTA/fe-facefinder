@@ -45,7 +45,7 @@ function Consent({ value, onChange }) {
                 </h4>
                 <ul className="list-disc ml-5 space-y-1">
                   <li>
-                    Do not upload other people's facial images without their permission.
+                    Do not upload other people&apos;s facial images without their permission.
                     If necessary, obtain consent from the individual or their guardian.
                   </li>
                   <li>
@@ -64,11 +64,11 @@ function Consent({ value, onChange }) {
                     your ability to view photo albums.
                   </li>
                   <li>
-                    If the album manager enables the "Search by Face" feature, users can upload
+                    If the album manager enables the &quot;Search by Face&quot; feature, users can upload
                     a face to search for related photos. Results are only shown to the searcher.
                   </li>
                   <li>
-                    If "Automatic Facial Recognition" is enabled, faces in images will be
+                    If &quot;Automatic Facial Recognition&quot; is enabled, faces in images will be
                     detected and listed below the image. Clicking a face performs a search.
                   </li>
                   <li>
