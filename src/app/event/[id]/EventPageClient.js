@@ -37,11 +37,11 @@ export default function EventPageClient({ eventId }) {
     fetchEvent();
   }, [id]);
 
-  if (loading) return <div className="p-8 text-center">กำลังโหลด...</div>;
+  if (loading) return <div className="p-8 text-center">Loading...</div>;
   if (error) return <div className="p-8 text-center text-red-500">{error}</div>;
   if (!event)
     return (
-      <div className="p-8 text-center text-red-500">ไม่พบข้อมูลอีเวนต์นี้</div>
+      <div className="p-8 text-center text-red-500">Event Not Found</div>
     );
 
   return (

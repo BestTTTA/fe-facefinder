@@ -24,11 +24,11 @@ function ShowEvent() {
   }, []);
 
   if (loading) {
-    return <div className="p-4 text-text-primary">กำลังโหลด...</div>;
+    return <div className="p-4 text-text-primary">Loading...</div>;
   }
 
   if (events.length === 0) {
-    return <div className="p-4 text-text-primary">ไม่พบอีเวนต์</div>;
+    return <div className="p-4 text-text-primary">Event Not Found</div>;
   }
 
   return (
