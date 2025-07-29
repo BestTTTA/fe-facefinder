@@ -34,7 +34,7 @@ function Footer() {
                 ASC is an annual forum for Asian youth, inspiring science through talks by Nobel Laureates and experts.
               </p>
               <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-                Suranaree University
+                Suranaree University of Technology
               </p>
             </div>
 
