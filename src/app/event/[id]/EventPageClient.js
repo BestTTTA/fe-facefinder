@@ -81,8 +81,9 @@ export default function EventPageClient({ eventId }) {
           <div className="text-h3 text-text-secondary font-thin mb-4">
             {event.event_details}
           </div>
-          <div className="text-h2 text-text-primary font-thin mb-4">
-            {formatThaiDateTime(event.start_at)}
+          <div className="text-h4 text-text-primary font-thin mb-4">
+                  {formatThaiDateTime(event.start_at)} -{" "}
+                  {formatThaiDateTime(event.end_at)}
           </div>
         </div>
       </div>
