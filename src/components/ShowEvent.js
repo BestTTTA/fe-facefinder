@@ -53,14 +53,14 @@ function ShowEvent() {
               />
 
               {/* Glassmorphism info box */}
-              <div className="absolute bottom-0 left-0 w-full z-20 p-4 flex flex-col gap-1 backdrop-blur-md bg-glowMid/20 bg-opacity-50 rounded-b-2xl">
+              <div className="absolute bottom-0 left-0 w-full z-20 p-4 flex flex-col gap-0 backdrop-blur-lg bg-glowMid/20 bg-opacity-50 rounded-b-2xl">
                 <div
-                  className="text-h2 text-text-primary drop-shadow-md "
+                  className="text-h2 text-text-primary drop-shadow-md text-shadow-lg"
                   title={event.event_name}
                 >
                   {event.event_name}
                 </div>
-                <div className="text-h3 text-text-primary font-thin drop-shadow-md flex items-center gap-2">
+                <div className="text-h3 text-shadow-lg text-text-primary font-thin drop-shadow-md flex items-center gap-2">
                   <Image
                     src="/clock-icon.svg"
                     alt="Clock icon"
