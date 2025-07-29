@@ -24,17 +24,17 @@ function ShowEvent() {
   }, []);
 
   if (loading) {
-    return <div className="p-4 text-textSecondary">กำลังโหลด...</div>;
+    return <div className="p-4 text-text-primary">กำลังโหลด...</div>;
   }
 
   if (events.length === 0) {
-    return <div className="p-4 text-textSecondary">ไม่พบอีเวนต์</div>;
+    return <div className="p-4 text-text-primary">ไม่พบอีเวนต์</div>;
   }
 
   return (
     <div className="container p-4">
       <h1 className="text-h1 text-text-primary font-bold mb-4">
-        อีเวนท์ล่าสุด
+        EVENTS
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
         {events.map((event) => (

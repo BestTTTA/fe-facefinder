@@ -62,12 +62,12 @@ export default function SearchPage({ eventId }) {
               "videoRef.current was null even after setting isCameraOpen to true. Retrying or handling differently."
             );
             closeCamera();
-            setSearchMessage("❌ เกิดข้อผิดพลาดในการเตรียมกล้อง");
+            setSearchMessage("❌ An error occurred while preparing the camera.");
           }
         } catch (err) {
           console.error("Error accessing camera:", err);
           setSearchMessage(
-            "❌ ไม่สามารถเข้าถึงกล้องได้: โปรดตรวจสอบการอนุญาตของเบราว์เซอร์หรือไม่มีกล้อง"
+            "❌ Cannot access the camera: Please check your browser permissions or ensure a camera is connected."
           );
           closeCamera();
         }
@@ -114,7 +114,7 @@ export default function SearchPage({ eventId }) {
 
   const capturePhoto = () => {
     if (!hasConsent) {
-      setSearchMessage("กรุณายอมรับเงื่อนไขการใช้งานก่อนดำเนินการต่อ");
+      setSearchMessage("Please accept the terms of use before proceeding.");
       return;
     }
     if (videoRef.current && canvasRef.current) {
@@ -138,21 +138,21 @@ export default function SearchPage({ eventId }) {
           const objectUrl = URL.createObjectURL(file);
           setPreviewImage(objectUrl);
         } else {
-          setSearchMessage("❌ ไม่สามารถจับภาพจากกล้องได้");
+          setSearchMessage("❌ Unable to capture image from the camera.");
         }
       }, "image/png");
     } else {
-      setSearchMessage("❌ กล้องไม่พร้อมสำหรับการจับภาพ");
+      setSearchMessage("❌ Camera is not ready to capture.");
     }
   };
 
   const handleSearchImage = async () => {
     if (!hasConsent) {
-      setSearchMessage("กรุณายอมรับเงื่อนไขการใช้งานก่อนดำเนินการต่อ");
+      setSearchMessage("Please accept the terms of use before proceeding.");
       return;
     }
     if (!searchFile) {
-      setSearchMessage("โปรดเลือกรูปภาพหรือถ่ายภาพจากกล้องเพื่อค้นหา");
+      setSearchMessage("Please select an image or take a photo with the camera to search");
       return;
     }
     if (!eventId) {
@@ -164,7 +164,7 @@ export default function SearchPage({ eventId }) {
     formData.append("file", searchFile);
 
     setIsSearching(true);
-    setSearchMessage("กำลังค้นหาใบหน้าที่คล้ายกัน...");
+    setSearchMessage("Searching...");
 
     try {
       const response = await axios.post(
@@ -182,8 +182,8 @@ export default function SearchPage({ eventId }) {
         setSearchMessage("");
       } else {
         setSearchMessage(
-          `❌ ข้อผิดพลาด: ${
-            response.data.message || "เกิดข้อผิดพลาดที่ไม่รู้จักระหว่างการค้นหา"
+          `❌ Error: ${
+            response.data.message || "An unknown error occurred during the search."
           }`
         );
         setSearchResults(null);
@@ -191,7 +191,7 @@ export default function SearchPage({ eventId }) {
     } catch (err) {
       console.error("Search error:", err);
       setSearchMessage(
-        `❌ ไม่สามารถค้นหารูปภาพได้: ${
+        `❌ Unable to find images.: ${
           err.response?.data?.detail || err.message
         }`
       );
@@ -219,12 +219,11 @@ export default function SearchPage({ eventId }) {
   return (
     <div className="max-w-container mx-auto bg-surface rounded-lg shadow-lg p-4">
       <h1 className="text-h1 font-bold mb-6 text-center text-text-primary">
-        🔍 ค้นหารูปของคุณด้วยใบหน้า
+        🔍 Find your pictures
       </h1>
-      {/* <p className="text-h3 font-thin text-text-secondary mb-6 text-center">
-        อัปโหลดรูปภาพจากไฟล์
-        หรือถ่ายภาพจากกล้องเพื่อค้นหาใบหน้าที่คล้ายกันในฐานข้อมูล FaceMeNow
-      </p> */}
+      <p className="text-h3 font-thin text-text-secondary mb-6 text-center">
+        Find your pictures by face recognition
+      </p>
 
       {/* Mode Toggle */}
       <div className="flex justify-center mb-6">
@@ -237,7 +236,7 @@ export default function SearchPage({ eventId }) {
           }`}
           onClick={() => setMode("upload")}
         >
-          อัพโหลดรูป
+          Upload a photo
         </button>
         <button
           type="button"
@@ -248,7 +247,7 @@ export default function SearchPage({ eventId }) {
           }`}
           onClick={() => setMode("camera")}
         >
-          ถ่ายรูป
+          Capture a photo
         </button>
       </div>
 
@@ -267,11 +266,11 @@ export default function SearchPage({ eventId }) {
             />
             <p className="mb-2 text-sm text-gray-500">
               <span className="font-thin text-text-primary text-h2">
-                อัพโหลดรูป
+                Upload a photo
               </span>
             </p>
             <p className="text-h3 text-text-primary font-thin">
-              คลิกที่นี่เพื่ออัปโหลดรูปภาพ
+              Upload an image of your face
             </p>
           </div>
           <input
@@ -300,8 +299,8 @@ export default function SearchPage({ eventId }) {
                 width={48}
                 height={48}
               />
-              เปิดกล้อง
-              <p className="text-h3 font-thin">กดที่นี่เพื่อเปิดกล้อง</p>
+              Camera
+              <p className="text-h3 font-thin">take a photo of your face.</p>
             </button>
           ) : (
             <div className="flex flex-col items-center">
@@ -318,13 +317,13 @@ export default function SearchPage({ eventId }) {
                   onClick={capturePhoto}
                   className="flex-1 bg-solid hover:bg-secondary-dark text-text-primary font-bold py-2 px-4 rounded-lg transition-colors duration-200 shadow-md"
                 >
-                  ถ่าย
+                  Capture a photo
                 </button>
                 <button
                   onClick={closeCamera}
                   className="flex-1 bg-danger-DEFAULT bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 shadow-md"
                 >
-                  ปิด
+                  Close
                 </button>
               </div>
             </div>
@@ -336,7 +335,7 @@ export default function SearchPage({ eventId }) {
       {previewImage && (
         <div className="mb-6 text-center">
           <h2 className="text-h2 font-bold mb-2 text-text-primary">
-            ภาพที่เลือก/ถ่าย
+            Chosen/Taken Photo
           </h2>
           <Image
             src={previewImage}
@@ -349,8 +348,8 @@ export default function SearchPage({ eventId }) {
           <button
             onClick={handleClearImage}
             className="mt-2 p-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition inline-flex items-center justify-center"
-            title="ล้างรูปภาพ"
-            aria-label="ล้างรูปภาพ"
+            title="Clear image"
+            aria-label="Clear image"
             type="button"
           >
             <Image
@@ -384,7 +383,7 @@ export default function SearchPage({ eventId }) {
         className="w-full text-text-primary py-3 px-6 rounded-full transition-colors duration-200 text-lg shadow-md font-bold"
         style={{ background: "var(--btn-gradient)" }}
       >
-        {isSearching ? "กำลังค้นหา..." : "เริ่มต้นค้นหาใบหน้า"}
+        {isSearching ? "Searching..." : "Start Searching by Face"}
       </button>
 
       {/* Search Results Section */}
@@ -393,7 +392,7 @@ export default function SearchPage({ eventId }) {
       searchResults.results.matches ? (
         <div className="mt-10">
           <h2 className="text-h2 font-bold mb-4 text-center text-text-primary">
-            ผลลัพธ์การค้นหา
+            Results of the Search
           </h2>
 
           {/* Statistics */}
@@ -442,7 +441,7 @@ export default function SearchPage({ eventId }) {
             if (allMatches.length === 0) {
               return (
                 <div className="mt-8 text-center text-gray-500">
-                  ไม่พบผลลัพธ์การค้นหา
+                  Result Not Found
                 </div>
               );
             }
@@ -450,7 +449,7 @@ export default function SearchPage({ eventId }) {
             return (
               <div>
                 <div className="mb-4 text-center text-lg font-semibold text-gray-800">
-                  พบรูปภาพทั้งหมด: {allMatches.length} รายการ
+                  Total images found: {allMatches.length} items
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -473,7 +472,7 @@ export default function SearchPage({ eventId }) {
                         </div>
                       )}
                       <div className="text-sm text-gray-600 mt-2">
-                        ความคล้าย: {Math.round(match.confidence * 100)}%
+                        Match: {Math.round(match.confidence * 100)}%
                       </div>
                     </div>
                   ))}
@@ -532,7 +531,7 @@ export default function SearchPage({ eventId }) {
                             className="object-contain rounded-lg shadow-md max-h-[60vh] max-w-full"
                           />
                           <div className="mt-2 text-sm text-gray-600">
-                            ความคล้าย:{" "}
+                            Match:{" "}
                             {Math.round(
                               allMatches[previewIndex].confidence * 100
                             )}
@@ -545,7 +544,7 @@ export default function SearchPage({ eventId }) {
                             rel="noopener noreferrer"
                             className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
                           >
-                            บันทึกรูปภาพ
+                            Save image
                           </a>
                         </div>
 
@@ -579,7 +578,7 @@ export default function SearchPage({ eventId }) {
         </div>
       ) : searchResults && !searchResults.results?.matches ? (
         <div className="mt-8 text-center text-gray-500">
-          ไม่พบผลลัพธ์การค้นหา
+          Result Not Found
         </div>
       ) : null}
     </div>
