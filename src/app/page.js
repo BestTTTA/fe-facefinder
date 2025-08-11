@@ -7,17 +7,30 @@ import AlertBar from "@/components/AlertBar";
 export default function Home() {
   return (
     <div className="flex flex-col gap-9 bg-surface h-screen relative">
- <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-  <div className="bg-white rounded-2xl shadow-lg p-6 max-w-sm text-center">
-    <h2 className="text-xl font-bold mb-3">🚧 กำลังปรับปรุงระบบ<br />🚧 System Maintenance</h2>
-    <p className="text-gray-600 mb-5">
-      ขณะนี้ระบบกำลังอยู่ในระหว่างการปรับปรุง<br />
-      The system is currently under maintenance.<br />
-      กรุณากลับมาใหม่อีกครั้งในภายหลัง<br />
-      Please try again later.
-    </p>
-  </div>
-</div>
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="bg-white rounded-2xl shadow-lg p-6 max-w-sm text-center">
+          <h2 className="text-xl font-bold mb-3">
+            🚧 กำลังปรับปรุงระบบ
+            <br />
+            🚧 System Maintenance
+          </h2>
+          <p className="text-gray-600 mb-5">
+            ขณะนี้ระบบกำลังอยู่ในระหว่างการปรับปรุง
+            <br />
+            The system is currently under maintenance.
+            <br />
+            กรุณากลับมาใหม่อีกครั้งในภายหลัง
+            <br />
+            Please try again later.
+            <br />
+            <span className="font-semibold text-red-500">
+              📅 ระบบจะกลับมาเปิดให้ใช้งานอีกครั้งในวันที่ 14 สิงหาคม 2025
+              <br />
+              📅 The system will be available again on 14 August 2025.
+            </span>
+          </p>
+        </div>
+      </div>
 
       <main className="flex flex-col items-center max-w-full gap-8">
         {/* <AlertBar /> */}
