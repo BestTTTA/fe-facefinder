@@ -517,7 +517,7 @@ const handleUSDateChange = (field, value) => {
     return (
       <div className="flex items-center justify-between mt-8">
         <div className="text-sm text-gray-700">
-          แสดง {((currentPage - 1) * pageSize) + 1} - {Math.min(currentPage * pageSize, totalCount)} จาก {totalCount.toLocaleString()} รูป
+          Show {((currentPage - 1) * pageSize) + 1} - {Math.min(currentPage * pageSize, totalCount)} จาก {totalCount.toLocaleString()} รูป
         </div>
         
         <div className="flex items-center space-x-2">
@@ -556,7 +556,7 @@ const handleUSDateChange = (field, value) => {
         </div>
         
         <div className="flex items-center space-x-2">
-          <label className="text-sm text-gray-700">แสดง:</label>
+          <label className="text-sm text-gray-700">Show:</label>
           <select
             value={pageSize}
             onChange={(e) => {
@@ -571,7 +571,7 @@ const handleUSDateChange = (field, value) => {
             <option value={50}>50</option>
             <option value={100}>100</option>
           </select>
-          <span className="text-sm text-gray-700">รูป/หน้า</span>
+          <span className="text-sm text-gray-700">images/page</span>
         </div>
       </div>
     );

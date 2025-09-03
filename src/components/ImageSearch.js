@@ -89,23 +89,23 @@ const ImageSearch = () => {
     return (
       <div className="mt-8">
         <div className="bg-gray-50 p-4 rounded-lg mb-6">
-          <h3 className="text-lg font-semibold mb-2">ผลการค้นหา</h3>
+          <h3 className="text-lg font-semibold mb-2">Search Results</h3>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="text-center">
               <p className="text-2xl font-bold text-blue-600">{statistics.total_matches}</p>
-              <p className="text-sm text-gray-600">ทั้งหมด</p>
+              <p className="text-sm text-gray-600">Total</p>
             </div>
             <div className="text-center">
               <p className="text-2xl font-bold text-green-600">{statistics.exact_matches}</p>
-              <p className="text-sm text-gray-600">ตรงกันแน่นอน</p>
+              <p className="text-sm text-gray-600">Exact Matches</p>
             </div>
             <div className="text-center">
               <p className="text-2xl font-bold text-yellow-600">{statistics.high_matches}</p>
-              <p className="text-sm text-gray-600">ตรงกันสูง</p>
+              <p className="text-sm text-gray-600">High Matches</p>
             </div>
             <div className="text-center">
               <p className="text-2xl font-bold text-orange-600">{statistics.partial_matches}</p>
-              <p className="text-sm text-gray-600">ตรงกันบางส่วน</p>
+              <p className="text-sm text-gray-600">Partial Matches</p>
             </div>
           </div>
         </div>
@@ -114,7 +114,7 @@ const ImageSearch = () => {
         {matches.exact_matches.length > 0 && (
           <div className="mb-8">
             <h4 className="text-xl font-semibold mb-4 text-green-800">
-              ตรงกันแน่นอน ({matches.exact_matches.length})
+              Exact Matches ({matches.exact_matches.length})
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {matches.exact_matches.map((match, index) => renderMatchCard(match, index, 'exact'))}
@@ -126,7 +126,7 @@ const ImageSearch = () => {
         {matches.high_matches.length > 0 && (
           <div className="mb-8">
             <h4 className="text-xl font-semibold mb-4 text-yellow-800">
-              ตรงกันสูง ({matches.high_matches.length})
+              High Matches ({matches.high_matches.length})
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {matches.high_matches.map((match, index) => renderMatchCard(match, index, 'high'))}
@@ -138,14 +138,14 @@ const ImageSearch = () => {
         {matches.partial_matches.length > 0 && (
           <div className="mb-8">
             <h4 className="text-xl font-semibold mb-4 text-orange-800">
-              ตรงกันบางส่วน ({matches.partial_matches.length})
+              Partial Matches ({matches.partial_matches.length})
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {matches.partial_matches.slice(0, 20).map((match, index) => renderMatchCard(match, index, 'partial'))}
             </div>
             {matches.partial_matches.length > 20 && (
               <p className="text-center text-gray-500 mt-4">
-                แสดง 20 จาก {matches.partial_matches.length} รายการ
+                Show 20 from {matches.partial_matches.length} items
               </p>
             )}
           </div>
