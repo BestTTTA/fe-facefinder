@@ -169,6 +169,45 @@ const ImageGallery = () => {
     }
   };
 
+  // เพิ่ม functions เหล่านี้ในคอมโพเนนท์
+const formatDateToUS = (isoDate) => {
+  if (!isoDate) return '';
+  const date = new Date(isoDate);
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${month}/${day}/${year}`;
+};
+
+const parseUSDate = (usDate) => {
+  if (!usDate) return '';
+  const match = usDate.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (!match) return '';
+  
+  const [, month, day, year] = match;
+  const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+  
+  // Validate date
+  if (date.getMonth() !== parseInt(month) - 1) return '';
+  
+  return date.toISOString().split('T')[0];
+};
+
+const handleUSDateChange = (field, value) => {
+  // Auto-format as user types
+  let formattedValue = value.replace(/\D/g, '');
+  if (formattedValue.length >= 2) {
+    formattedValue = formattedValue.substring(0, 2) + '/' + formattedValue.substring(2);
+  }
+  if (formattedValue.length >= 5) {
+    formattedValue = formattedValue.substring(0, 5) + '/' + formattedValue.substring(5, 9);
+  }
+  
+  // Convert to ISO date for backend
+  const isoDate = parseUSDate(formattedValue);
+  handleFilterChange(field, isoDate);
+};
+
   // Effects
   useEffect(() => {
     fetchImages();
@@ -182,7 +221,7 @@ const ImageGallery = () => {
     <div className={`bg-white rounded-lg shadow-md p-6 mb-6 transition-all duration-300 ${showFilters ? 'block' : 'hidden'}`}>
       <h3 className="text-lg font-semibold mb-4 flex items-center">
         <Filter className="mr-2" size={20} />
-        ตัวกรองการค้นหา
+        Filters
       </h3>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -194,7 +233,7 @@ const ImageGallery = () => {
             onChange={(e) => handleFilterChange('event_id', e.target.value)}
             className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
           >
-            <option value="">ทุก Event</option>
+            <option value="">All Event</option>
             {events.map((event) => (
               <option key={event.id} value={event.id}>{event.event_name}</option>
             ))}
@@ -202,7 +241,7 @@ const ImageGallery = () => {
         </div>
 
         {/* Photographer Filter */}
-        <div>
+        {/* <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">ช่างภาพ</label>
           <select
             value={filters.cuser_id}
@@ -216,48 +255,52 @@ const ImageGallery = () => {
               </option>
             ))}
           </select>
-        </div>
+        </div> */}
 
         {/* Date Range */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">วันที่เริ่ม</label>
-          <input
-            type="date"
-            value={filters.start_date}
-            onChange={(e) => handleFilterChange('start_date', e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
+  <label className="block text-sm font-medium text-gray-700 mb-2">Start Date</label>
+  <input
+    type="text"
+    value={filters.start_date ? formatDateToUS(filters.start_date) : ''}
+    onChange={(e) => handleUSDateChange('start_date', e.target.value)}
+    placeholder="MM/DD/YYYY"
+    pattern="(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/[0-9]{4}"
+    className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+  />
+</div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">วันที่สิ้นสุด</label>
-          <input
-            type="date"
-            value={filters.end_date}
-            onChange={(e) => handleFilterChange('end_date', e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
+<div>
+  <label className="block text-sm font-medium text-gray-700 mb-2">End Date</label>
+  <input
+    type="text"
+    value={filters.end_date ? formatDateToUS(filters.end_date) : ''}
+    onChange={(e) => handleUSDateChange('end_date', e.target.value)}
+    placeholder="MM/DD/YYYY"
+    pattern="(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/[0-9]{4}"
+    className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+  />
+</div>
 
         {/* Month and Year */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">เดือน</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Month</label>
           <select
             value={filters.month}
             onChange={(e) => handleFilterChange('month', e.target.value)}
             className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
           >
-            <option value="">ทุกเดือน</option>
+            <option value="">All Months</option>
             {Array.from({length: 12}, (_, i) => (
               <option key={i+1} value={i+1}>
-                {new Date(2024, i, 1).toLocaleDateString('th-TH', { month: 'long' })}
+                {new Date(2024, i, 1).toLocaleDateString('en-US', { month: 'long' })}
               </option>
             ))}
           </select>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">ปี</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Year</label>
           <input
             type="number"
             value={filters.year}
@@ -270,30 +313,30 @@ const ImageGallery = () => {
 
         {/* Has Faces Filter */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">มีใบหน้า</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Have Faces</label>
           <select
             value={filters.has_faces === null ? '' : filters.has_faces.toString()}
             onChange={(e) => handleFilterChange('has_faces', e.target.value === '' ? null : e.target.value === 'true')}
             className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
           >
-            <option value="">ทั้งหมด</option>
-            <option value="true">มีใบหน้า</option>
-            <option value="false">ไม่มีใบหน้า</option>
+            <option value="">All</option>
+            <option value="true">Have Faces</option>
+            <option value="false">No Faces</option>
           </select>
         </div>
 
         {/* Sort By */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">เรียงตาม</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Sort By</label>
           <select
             value={filters.sort_by}
             onChange={(e) => handleFilterChange('sort_by', e.target.value)}
             className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
           >
-            <option value="newest">ใหม่สุด</option>
-            <option value="oldest">เก่าสุด</option>
-            <option value="most_faces">มีใบหน้ามากสุด</option>
-            <option value="event_name">ชื่อ Event</option>
+            <option value="newest">New</option>
+            <option value="oldest">Oldest</option>
+            <option value="most_faces">Most Faces</option>
+            <option value="event_name">Event Name</option>
           </select>
         </div>
       </div>
@@ -304,13 +347,13 @@ const ImageGallery = () => {
           className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center"
         >
           <Search className="mr-2" size={16} />
-          ค้นหา
+          Search
         </button>
         <button
           onClick={handleResetFilters}
           className="px-6 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700"
         >
-          รีเซ็ต
+          Reset
         </button>
       </div>
     </div>
@@ -322,22 +365,22 @@ const ImageGallery = () => {
     return (
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <div className="bg-blue-50 p-4 rounded-lg">
-          <h3 className="text-lg font-semibold text-blue-800">รูปทั้งหมด</h3>
+          <h3 className="text-lg font-semibold text-blue-800">Total Images</h3>
           <p className="text-2xl font-bold text-blue-600">{stats.total_images?.toLocaleString()}</p>
         </div>
         
         <div className="bg-green-50 p-4 rounded-lg">
-          <h3 className="text-lg font-semibold text-green-800">มีใบหน้า</h3>
+          <h3 className="text-lg font-semibold text-green-800">Have Faces</h3>
           <p className="text-2xl font-bold text-green-600">{stats.images_with_faces?.toLocaleString()}</p>
         </div>
         
         <div className="bg-orange-50 p-4 rounded-lg">
-          <h3 className="text-lg font-semibold text-orange-800">ไม่มีใบหน้า</h3>
+          <h3 className="text-lg font-semibold text-orange-800">No Faces</h3>
           <p className="text-2xl font-bold text-orange-600">{stats.images_without_faces?.toLocaleString()}</p>
         </div>
         
         <div className="bg-purple-50 p-4 rounded-lg">
-          <h3 className="text-lg font-semibold text-purple-800">หน้าปัจจุบัน</h3>
+          <h3 className="text-lg font-semibold text-purple-800">Current Page</h3>
           <p className="text-2xl font-bold text-purple-600">{currentPage} / {totalPages}</p>
         </div>
       </div>
@@ -421,16 +464,13 @@ const ImageGallery = () => {
                   {image.event_name || 'No Event'}
                 </h3>
                 <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
-                  {image.face_count} หน้า
+                  {image.face_count} faces
                 </span>
               </div>
               
-              <p className="text-xs text-gray-500 mb-1">
-                ช่างภาพ: {image.photographer_name || 'Unknown'}
-              </p>
               
               <p className="text-xs text-gray-400">
-                {new Date(image.create_at).toLocaleDateString('th-TH', {
+                {new Date(image.create_at).toLocaleDateString('en-US', {
                   year: 'numeric',
                   month: 'short',
                   day: 'numeric',
@@ -623,13 +663,13 @@ const ImageGallery = () => {
     <div className="container mx-auto px-4 py-8">
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">จัดการรูปภาพ</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Images Mangement</h1>
         <button
           onClick={() => setShowFilters(!showFilters)}
           className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center"
         >
           <Filter className="mr-2" size={16} />
-          {showFilters ? 'ซ่อน' : 'แสดง'}ตัวกรอง
+          {showFilters ? 'Hide' : 'Show'} Filters
         </button>
       </div>
 
