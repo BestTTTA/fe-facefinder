@@ -517,7 +517,7 @@ const handleUSDateChange = (field, value) => {
     return (
       <div className="flex items-center justify-between mt-8">
         <div className="text-sm text-gray-700">
-          Show {((currentPage - 1) * pageSize) + 1} - {Math.min(currentPage * pageSize, totalCount)} จาก {totalCount.toLocaleString()} รูป
+          Show {((currentPage - 1) * pageSize) + 1} - {Math.min(currentPage * pageSize, totalCount)} From {totalCount.toLocaleString()} images
         </div>
         
         <div className="flex items-center space-x-2">
